@@ -16,7 +16,7 @@ dfActivityNoNA <- na.omit(dfActivity)
 ```r
 stepsByDay <- aggregate(x=dfActivityNoNA$steps, by=list(dfActivityNoNA$date), FUN=sum)
 
-mp<- barplot(stepsByDay$x, axes=TRUE, ylab="Steps per Day", xlab="Day")
+mp<- barplot(stepsByDay$x, axes=TRUE, ylab="Steps per Day", xlab="Day", main="Steps Taken Per Day")
 axis(1, at=mp, labels=stepsByDay$Group.1)
 ```
 
@@ -38,7 +38,7 @@ summary(stepsByDay$x)
 
 ```r
 stepsByInterval <- aggregate(x=dfActivityNoNA$steps, by=list(dfActivityNoNA$interval), FUN=mean)
-plot(stepsByInterval$Group.1,stepsByInterval$x, type="l", xlab="Time Interval in Military Format",ylab="Steps in every 5 minutes interval" )
+plot(stepsByInterval$Group.1,stepsByInterval$x, type="l", xlab="Time Interval in Military Format",ylab="Steps in every 5 minutes interval")
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-4-1.png) 
@@ -79,6 +79,14 @@ dfActivityImpute$steps[is.na(dfActivityImpute$steps)] <- mean(dfActivityImpute$s
 # 4.  calculate total number of steps each day with modified dataset
 stepsByDayImpute <- aggregate(x=dfActivityImpute$steps, by=list(dfActivityImpute$date), FUN=sum)
 
+# Histogram of steps taken with imputed dataset
+mpImpute<- barplot(stepsByDayImpute$x, axes=TRUE, ylab="Steps per Day", xlab="Day", main="Steps Taken Per Day with Missing Valued Filled")
+axis(1, at=mpImpute, labels=stepsByDayImpute$Group.1)
+```
+
+![](PA1_template_files/figure-html/unnamed-chunk-7-1.png) 
+
+```r
 # calculate the mean and median of total number of steps taken per day with the imputed dataset
 summary(stepsByDayImpute)
 ```
